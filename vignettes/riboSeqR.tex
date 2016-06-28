@@ -8,9 +8,9 @@
 \title{riboSeqR}
 \author{Thomas J. Hardcastle, Betty Y.W. Chung}
 
-\RequirePackage{/applications/R/R-3.2.0/library/BiocStyle/resources/latex/Bioconductor}
+\RequirePackage{/applications/R/R-3.2.4/library/BiocStyle/resources/tex/Bioconductor}
 
-\AtBeginDocument{\bibliographystyle{/applications/R/R-3.2.0/library/BiocStyle/resources/latex/unsrturl}}
+\AtBeginDocument{\bibliographystyle{/applications/R/R-3.2.4/library/BiocStyle/resources/tex/unsrturl}}
 \usepackage{Sweave}
 \begin{document}
 
@@ -217,28 +217,28 @@ These data may be used in an analysis of differential translation through compar
 > topCounts(pD, "DT", normaliseData = TRUE)
 \end{Sinput}
 \begin{Soutput}
-             seqnames start  end width strand frame  WT.1  WT.2   M.1   M.2   Likelihood
-1        CUFF.28790.1   165  530   366      *     2   3:3   1:1   0:0   0:0 0.0006090042
-2        CUFF.26092.1     7  450   444      *     0   1:1   1:1   0:0   0:0 0.0006090041
-3  Cre17.g723750.t1.3   516  638   123      *     2   3:3   3:3   0:0   0:0 0.0006090036
-4  Cre12.g554250.t1.1   580 3951  3372      *     0   0:0   0:0   2:2   0:0 0.0005777916
-5           g18028.t1   192 2108  1917      *     2   1:1   1:1   2:2   3:3 0.0005633553
-6  Cre17.g717750.t1.2   106  828   723      *     0   1:1   1:1   2:2   3:3 0.0005633552
-7         CUFF.9523.1    78 1040   963      *     2 10:10 14:14 59:59 33:33 0.0005633550
-8            g9881.t1   219 2030  1812      *     2   1:1   0:0   2:2   0:0 0.0005633550
-9  Cre03.g160200.t1.2    87  848   762      *     2   4:4   0:0   2:2   5:5 0.0005633547
-10       CUFF.26944.1   612 1049   438      *     2   3:3   1:1   4:4   3:3 0.0005633547
-   ordering    FDR.DT   FWER.DT
-1      M=WT 0.9993910 0.9993910
-2      M=WT 0.9993910 0.9999996
-3      M=WT 0.9993910 1.0000000
-4      M=WT 0.9993988 1.0000000
-5      M=WT 0.9994064 1.0000000
-6      M=WT 0.9994114 1.0000000
-7      M=WT 0.9994150 1.0000000
-8      M=WT 0.9994177 1.0000000
-9      M=WT 0.9994198 1.0000000
-10     M=WT 0.9994215 1.0000000
+             seqnames start  end width strand frame startCodon stopCodon context minus3
+1        CUFF.28790.1   165  530   366      *     2        ATG       TAA CACATGC      C
+2        CUFF.26092.1     7  450   444      *     0        ATG       TGA ACCATGG      A
+3  Cre17.g723750.t1.3   516  638   123      *     2        ATG       TAA GGCATGA      G
+4  Cre12.g554250.t1.1   580 3951  3372      *     0        ATG       TGA GAAATGG      G
+5           g18028.t1   192 2108  1917      *     2        ATG       TGA GAAATGG      G
+6  Cre17.g717750.t1.2   106  828   723      *     0        ATG       TGA ACCATGG      A
+7         CUFF.9523.1    78 1040   963      *     2        ATG       TAA AAAATGG      A
+8            g9881.t1   219 2030  1812      *     2        ATG       TGA GAAATGG      G
+9  Cre03.g160200.t1.2    87  848   762      *     2        ATG       TGA ACAATGC      A
+10       CUFF.26944.1   612 1049   438      *     2        ATG       AAA GCCATGC      G
+   plus1  WT.1  WT.2   M.1   M.2   Likelihood ordering    FDR.DT   FWER.DT
+1      C   3:3   1:1   0:0   0:0 0.0006090042     M=WT 0.9993910 0.9993910
+2      G   1:1   1:1   0:0   0:0 0.0006090041     M=WT 0.9993910 0.9999996
+3      A   3:3   3:3   0:0   0:0 0.0006090036     M=WT 0.9993910 1.0000000
+4      G   0:0   0:0   2:2   0:0 0.0005777916     M=WT 0.9993988 1.0000000
+5      G   1:1   1:1   2:2   3:3 0.0005633553     M=WT 0.9994064 1.0000000
+6      G   1:1   1:1   2:2   3:3 0.0005633552     M=WT 0.9994114 1.0000000
+7      G 10:10 14:14 59:59 33:33 0.0005633550     M=WT 0.9994150 1.0000000
+8      G   1:1   0:0   2:2   0:0 0.0005633550     M=WT 0.9994177 1.0000000
+9      C   4:4   0:0   2:2   5:5 0.0005633547     M=WT 0.9994198 1.0000000
+10     C   3:3   1:1   4:4   3:3 0.0005633547     M=WT 0.9994215 1.0000000
 \end{Soutput}
 \end{Schunk}
 
@@ -249,8 +249,8 @@ These data may be used in an analysis of differential translation through compar
 > sessionInfo()
 \end{Sinput}
 \begin{Soutput}
-R version 3.2.0 (2015-04-16)
-Platform: x86_64-unknown-linux-gnu (64-bit)
+R version 3.2.4 (2016-03-10)
+Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Debian GNU/Linux 8 (jessie)
 
 locale:
@@ -264,12 +264,12 @@ attached base packages:
 [9] base     
 
 other attached packages:
-[1] baySeq_2.5.2         perm_1.0-0.0         riboSeqR_1.2.0       abind_1.4-3         
-[5] GenomicRanges_1.20.5 GenomeInfoDb_1.4.1   IRanges_2.2.4        S4Vectors_0.6.0     
-[9] BiocGenerics_0.14.0 
+[1] baySeq_2.5.8         perm_1.0-0.0         riboSeqR_1.5.3       abind_1.4-3         
+[5] GenomicRanges_1.22.4 GenomeInfoDb_1.6.3   IRanges_2.4.8        S4Vectors_0.8.11    
+[9] BiocGenerics_0.17.5 
 
 loaded via a namespace (and not attached):
-[1] compiler_3.2.0  BiocStyle_1.6.0 XVector_0.8.0   tools_3.2.0    
+[1] zlibbioc_1.16.0 compiler_3.2.4  BiocStyle_1.8.0 XVector_0.10.0  tools_3.2.4    
 \end{Soutput}
 \end{Schunk}
 

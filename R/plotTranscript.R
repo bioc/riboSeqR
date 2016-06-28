@@ -54,7 +54,7 @@ function(transcript, coordinates, annotation, riboData, length = 27, frameShift 
     if(missing(main)) main = paste(names(alignments)[ii], " :: ", transcript, sep = "")
     ymax <- max(pretty(0:maxribo))
     
-    plot(NA, NA, axes = FALSE, ylim = c(0, ymax * c(1, 1.2)[as.integer(ii == 1) + 1]), xlim = c(floor(xlim[1]), ceiling(xlim[2])), xlab = "", ylab = "")
+    plot(NA, NA, axes = FALSE, ylim = c(0, ymax), xlim = c(floor(xlim[1]), ceiling(xlim[2])), xlab = "", ylab = "")
 
     bp <- barplot(matz, beside = TRUE, plot = FALSE, space = c(0,1), width = 0.75, xlim = xlim, ...)
 
