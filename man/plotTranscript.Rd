@@ -13,7 +13,8 @@ simultaneously be plotted and colour coded under the same scheme.
 }
 \usage{
 plotTranscript(transcript, coordinates, annotation, riboData, length =
-27, frameShift = 0, cap, riboScale, rnaScale, xlim, main, note = "", ...)
+27, frameShift = 0, cap, riboScale, rnaScale, xlim, main, note = "",
+libScales, ...)
 }
 \arguments{
   \item{transcript}{
@@ -57,6 +58,10 @@ plotTranscript(transcript, coordinates, annotation, riboData, length =
     Additional note to be added to plot titles (in addition to transcript
     and sample names).
   }
+  \item{libScales}{
+    If supplied, library scaling factors for normalisation of ribosomal
+    and RNA counts (see \code{\link{libScales}}).
+    }
   \item{...}{
     Additional arguments to be passed to plotting function.
     }

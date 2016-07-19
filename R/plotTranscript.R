@@ -1,5 +1,5 @@
 plotTranscript <-
-function(transcript, coordinates, annotation, riboData, length = 27, frameShift = 0, cap, riboScale, rnaScale, xlim, main, note = "", ...) {
+function(transcript, coordinates, annotation, riboData, length = 27, frameShift = 0, cap, riboScale, rnaScale, xlim, main, note = "", libScales, ...) {
 #  refseq <- solveMatch$refseq[solveMatch[,1] == transcript]
 #  annotation <- solveMatch$annotation[solveMatch[,1] == transcript]
 
@@ -22,37 +22,39 @@ function(transcript, coordinates, annotation, riboData, length = 27, frameShift 
   if(!missing(coordinates)) transceiling <- max(c(transceiling, end(coordinates)[as.character(seqnames(coordinates)) == transcript]))
   
   for(ii in 1:length(alignments)) {    
+      
+      plus27GRL <- alignments[[ii]]
+      allen <- plus27GRL[which(as.character(seqnames(plus27GRL)) == transcript & width(plus27GRL) == length)]
+      
+      createMat <- function(allen) {
+                                        #if(any(!is.null(allen$startCodon))) startCodon <- allen$startCodon else startCodon <- 0
+                                        #tabz <- table(start(allen) - startCodon)
+          tabz <- table(start(allen) - frameShift)
+          tabzz <- rep(0, ceiling(transceiling / 3) * 3)
+          tabzz[as.numeric(names(tabz))] <- tabz  
+          matz <- matrix(tabzz, nrow = 3);
+          colnames(matz) <- (1:(ceiling(transceiling / 3) * 3))[1:(ceiling(transceiling / 3)) * 3 - 2] + 1
+          matz
+      }
+      
+      matz <- createMat(allen)
+      if(!missing(cap)) matz[matz > cap] <- cap
+      if(!missing(libScales)) matz <- matz / libScales$riboLS[ii] * mean(libScales$riboLS)
+                                        #    if(ii < length(alignments)) colnames(matz) <- NULL
+      if(missing(xlim))
+          xlim <- c(0, ncol(matz) * 3)
+      
+      if(length(riboData@rnaGR) > 0) {      
+          covmRNA <- riboData@rnaGR[[ii]]
+          cov <- coverage(covmRNA[which(as.character(seqnames(covmRNA)) == transcript)])
+          cov <- as.integer(cov[[which(names(cov) == transcript)]])
+          if(!missing(libScales)) matz <- matz / libScales$rnaLS[ii] * mean(libScales$rnaLS)
+      } else cov <- 0
     
-    plus27GRL <- alignments[[ii]]
-    allen <- plus27GRL[which(as.character(seqnames(plus27GRL)) == transcript & width(plus27GRL) == length)]
-    
-    createMat <- function(allen) {
-      #if(any(!is.null(allen$startCodon))) startCodon <- allen$startCodon else startCodon <- 0
-      #tabz <- table(start(allen) - startCodon)
-      tabz <- table(start(allen) - frameShift)
-      tabzz <- rep(0, ceiling(transceiling / 3) * 3)
-      tabzz[as.numeric(names(tabz))] <- tabz  
-      matz <- matrix(tabzz, nrow = 3);
-      colnames(matz) <- (1:(ceiling(transceiling / 3) * 3))[1:(ceiling(transceiling / 3)) * 3 - 2] + 1
-      matz
-    }
-    
-    matz <- createMat(allen)
-    if(!missing(cap)) matz[matz > cap] <- cap
-#    if(ii < length(alignments)) colnames(matz) <- NULL
-    if(missing(xlim))
-      xlim <- c(0, ncol(matz) * 3)
-
-    if(length(riboData@rnaGR) > 0) {      
-      covmRNA <- riboData@rnaGR[[ii]]
-      cov <- coverage(covmRNA[which(as.character(seqnames(covmRNA)) == transcript)])
-      cov <- as.integer(cov[[which(names(cov) == transcript)]])      
-    } else cov <- 0
-    
-    if(!missing(riboScale)) maxribo <- riboScale[ii] else maxribo <- max(matz)
-    if(!missing(rnaScale)) maxrna <- rnaScale[ii] else maxrna <- max(cov)
-    if(missing(main)) main = paste(names(alignments)[ii], " :: ", transcript, sep = "")
-    ymax <- max(pretty(0:maxribo))
+      if(!missing(riboScale)) maxribo <- riboScale[ii] else maxribo <- max(matz)
+      if(!missing(rnaScale)) maxrna <- rnaScale[ii] else maxrna <- max(cov)
+      if(missing(main)) main = paste(names(alignments)[ii], " :: ", transcript, sep = "")
+      ymax <- max(pretty(0:maxribo))
     
     plot(NA, NA, axes = FALSE, ylim = c(0, ymax), xlim = c(floor(xlim[1]), ceiling(xlim[2])), xlab = "", ylab = "")
 
