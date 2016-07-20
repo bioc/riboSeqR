@@ -1,0 +1,10 @@
+cat("To cite riboSeqR in publications please reference: \n")
+bibentry(bibtype = "Article",
+         Author="Chung, B. Y.  and Hardcastle, T. J.  and Jones, J. D.  and Irigoyen, N.  and Firth, A. E.  and Baulcombe, D. C.  and Brierley, I. ",
+         Title="{{T}he use of duplex-specific nuclease in ribosome profiling and a user-friendly software package for {R}ibo-seq data analysis}",
+         Journal="RNA",
+         Year="2015",
+         Volume="21",
+         Number="10",
+         Pages="1731--1745",
+         Month="Oct")
