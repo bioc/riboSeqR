@@ -4,6 +4,7 @@
 \alias{riboCoding-class}
 \alias{[,riboCoding-method}
 \alias{[,riboCoding,ANY-method}
+\alias{[,riboCoding,ANY,ANY-method}
 \alias{show,riboCoding-method}
 
 \title{Class "riboCoding"}

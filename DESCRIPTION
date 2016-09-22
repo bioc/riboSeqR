@@ -1,9 +1,9 @@
 Package: riboSeqR
 Type: Package
-Title: Analysis of sequencing data from ribosome profiling experiments.
+Title: Analysis of sequencing data from ribosome profiling experiments
 Description: Plotting functions, frameshift detection and parsing of sequencing
     data from ribosome profiling experiments.
-Version: 1.7.3
+Version: 1.7.5
 Date: 2014-08-14
 Author: Thomas J. Hardcastle
 Maintainer: Thomas J. Hardcastle <tjh48@cam.ac.uk>
@@ -14,8 +14,8 @@ Depends:
     methods,
     GenomicRanges,
     abind
+Imports: Rsamtools, IRanges, baySeq, GenomeInfoDb
 Suggests:
-    baySeq,
     BiocStyle,
     RUnit,
     BiocGenerics
