@@ -13,19 +13,25 @@ the number of aligning reads within the coding sequence, split by frame
 and footprint size.
 }
 \usage{
-frameCounting(riboDat, fastaCDS, lengths = 25:30)
+frameCounting(riboDat, cds, lengths = 25:30, offset5p = 0, offset3p = 0)
 }
 \arguments{
   \item{riboDat}{
     A \code{riboData} object containing the ribosome footprints to be counted. 
 }
-  \item{fastaCDS}{
+  \item{cds}{
     A \code{GenomicRanges} object containing the coordinates of the
     coding sequences.
   }
   \item{lengths}{
     Lengths of ribosome footprints to be included in the \code{riboData} object.
   }
+  \item{offset5p}{
+    An offset to the 5' end of the coding sequence coordinates to
+    include ribosome footprints some distance upstream of coding start.}
+  \item{offset3p}{
+    An offset to the 3' end of the coding sequence coordinates to exclude
+    reads too close to coding stop.}
 }
 \value{
   A \code{riboCoding} object.

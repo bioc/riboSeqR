@@ -1,4 +1,4 @@
-frameCounting <-
+.oldframeCounting <-
 function(riboDat, fastaCDS, lengths = 25:30)
   {
     message("Calling frames...", appendLF = FALSE)
@@ -34,3 +34,42 @@ function(riboDat, fastaCDS, lengths = 25:30)
     fCs@replicates <- riboDat@replicates
     fCs
   }
+
+
+frameCounting <- function(riboDat, cds, lengths = 25:30, offset5p = 0, offset3p = 0)
+  {
+      message("Calling frames...", appendLF = FALSE)
+
+      getHits <- function(rgr, offset5p, offset3p) {
+          message(".", appendLF = FALSE)
+          rgr <- rgr[width(rgr) %in% lengths]
+          mcds <- cds; start(mcds) <- pmax(0, start(mcds) - offset5p); end(mcds) <- pmax(start(mcds), end(mcds) - offset3p)
+          fo <- findOverlaps(mcds, rgr)
+          dat <- cbind.data.frame(cds = factor(fo@queryHits, levels = 1:length(cds)),
+                                  frame = factor((start(rgr)[fo@subjectHits] - start(cds[fo@queryHits])) %% 3, levels = 0:2),
+                                  length = factor(width(rgr)[fo@subjectHits], levels = lengths))
+                           
+          
+          list(hits = table(dat), unqHits = table(dat[!duplicated(rgr)[fo@subjectHits],]))
+      }
+
+      riboCounts <- lapply(riboDat@riboGR, getHits, offset5p = offset5p, offset3p = offset3p)
+      #rnaCounts <- lapply(riboDat@rnaGR, getHits, offset5p = offset5p, offset3p = offset3p)
+      message("done!")
+      
+      fCs <- new("riboCoding")
+      fCs@hits <- aperm(do.call("abind", args = list(lapply(riboCounts, function(x) x$hits), along = 0)), c(2,1,3,4))
+      fCs@unqHits <- aperm(do.call("abind", args = list(lapply(riboCounts, function(x) x$unqHits), along = 0)), c(2,1,3,4))
+      if(length(dim(fCs@hits)) == 3) fCs@hits <- array(fCs@hits, c(dim(fCs@hits)[1], 1, dim(fCs@hits)[2:3]))
+      if(length(dim(fCs@unqHits)) == 3) fCs@unqHits <- array(fCs@unqHits, c(dim(fCs@unqHits)[1], 1, dim(fCs@unqHits)[2:3]))
+
+      dimnames(fCs@hits) <- list(NULL, names(riboDat@riboGR), 0:2, lengths)
+      dimnames(fCs@unqHits) <- list(NULL, names(riboDat@riboGR), 0:2, lengths)
+      
+      fCs@CDS <- cds
+      fCs@replicates <- riboDat@replicates      
+      
+      fCs
+   
+  }      
+

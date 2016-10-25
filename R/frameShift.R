@@ -6,28 +6,19 @@ readingFrame <- function(coordinates, riboDat, rC, lengths = 26:30) {
   if(missing(coordinates)) coordinates <- NULL
   if(missing(riboDat)) riboDat <- NULL
   if(missing(rC)) rC <- NULL
-  
-  frameCounts <- sapply(lengths, function(length) {
-    if((is.null(coordinates) | is.null(riboDat)) & !is.null(rC)) {
-      frameCounts <- rowSums(
-                       sapply(0:2, function(frame) {
-      frCDS <- which(rC@CDS$frame == frame)
-      if(length(frCDS) == 0) return(c(0, 0, 0))
-      z <- .sliceArray(list(frCDS), rC@hits, drop = FALSE)
-      zz <- z[,,,as.character(length),drop= FALSE]
-      cs <- colSums(matrix(apply(zz, 3, rowSums), nrow = nrow(zz)))
-#     cs <- cs[(1:3 - 1 + frame) %% 3 + 1]
-      cs
-    })
-                       )
-    } else if(!is.null(coordinates) & !is.null(riboDat)) {
+
+  if((is.null(coordinates) | is.null(riboDat)) & !is.null(rC)) {
+      frameCounts <- sapply(lengths, function(length)
+          sapply(0:2, function(frame) sum(rC@hits[,,as.character(frame), as.character(length)])))
+  } else if(!is.null(coordinates) & !is.null(riboDat)) {
       z <- plotCDS(coordinates, riboDat, lengths = length, plot = FALSE)
       frameCounts <- rowSums(sapply(z[[1]], function(zz) rowSums(zz[[1]])))
-    } else stop("Either coordinates and riboDat parameters, or rC parameter, must be supplied to estimate the frame shift")
-    frameCounts
-  })
+  } else stop("Either coordinates and riboDat parameters, or rC parameter, must be supplied to estimate the frame shift")
+
+
 
   colnames(frameCounts) <- lengths
+  rownames(frameCounts) <- 0:2
 
   frameCounts <- rbind(frameCounts, frame.ML = apply(frameCounts, 2, function(x) which.max(x)) - 1)
   

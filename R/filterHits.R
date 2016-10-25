@@ -36,7 +36,7 @@ filterHits <-
               rmap <- sumhits[ff, 1 + ((0:2 - (maxfS - maxframe)) %% 3)]
               compdat <- rbind(c(rmap[maxfS + 1], sum(sumhits[ff,as.character(lenfram)])),
                                c(max(fS[,as.character(len)]), sum(fS[1 + ((lenfram - (maxframe - maxfS)) %% 3), as.character(len)])))
-              if(which.max(compdat[,2] / compdat[,1]) == 2 | chisq.test(compdat)$p.value > 0.05) return(TRUE) else return(FALSE)
+              suppressWarnings(if(which.max(compdat[,2] / compdat[,1]) == 2 | chisq.test(compdat)$p.value > 0.05) return(TRUE) else return(FALSE))
             }, fS = fS)]
             if(length(reject) > 0) keep[reject] <- FALSE
           }
