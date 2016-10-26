@@ -45,12 +45,12 @@ frameCounting <- function(riboDat, cds, lengths = 25:30, offset5p = 0, offset3p 
           rgr <- rgr[width(rgr) %in% lengths]
           mcds <- cds; start(mcds) <- pmax(0, start(mcds) - offset5p); end(mcds) <- pmax(start(mcds), end(mcds) - offset3p)
           fo <- findOverlaps(mcds, rgr)
-          dat <- cbind.data.frame(cds = factor(fo@queryHits, levels = 1:length(cds)),
-                                  frame = factor((start(rgr)[fo@subjectHits] - start(cds[fo@queryHits])) %% 3, levels = 0:2),
-                                  length = factor(width(rgr)[fo@subjectHits], levels = lengths))
+          dat <- cbind.data.frame(cds = factor(queryHits(fo), levels = 1:length(cds)),
+                                  frame = factor((start(rgr)[subjectHits(fo)] - start(cds[queryHits(fo)])) %% 3, levels = 0:2),
+                                  length = factor(width(rgr)[subjectHits(fo)], levels = lengths))
                            
           
-          list(hits = table(dat), unqHits = table(dat[!duplicated(rgr)[fo@subjectHits],]))
+          list(hits = table(dat), unqHits = table(dat[!duplicated(rgr)[subjectHits(fo)],]))
       }
 
       riboCounts <- lapply(riboDat@riboGR, getHits, offset5p = offset5p, offset3p = offset3p)
