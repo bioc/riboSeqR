@@ -41,6 +41,8 @@ start = 3, sequence = 4), zeroIndexed = TRUE, header = FALSE, replicates, seqnam
 If a filename ends in '.bam' or '.BAM' it will be assumed that the file is
 a BAM file and processed accordingly. Otherwise, it will be treated as a
 flat text file.
+
+If using text files these should contain (as a minimum), the sequence of the read, the name of the sequence to which the read aligns, the strand to which it aligns, and the starting position of alignment. A Bowtie alignment (note that Bowtie, rather than Bowtie2, is recommended for short reads, which ribosome footprints are) using the option ``--suppress 1,6,7,8'' will generate this minimal data. It is by default assumed that the data are generated in this way, and the default columns specification for the default readRibodata function (see below) reflects this.
 }
 \value{
 \code{riboData} object.

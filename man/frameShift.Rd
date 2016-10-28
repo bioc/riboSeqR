@@ -12,20 +12,12 @@ specified, the sum of alignments in the different frames is shown,
 together with the maximum likelihood frame.
 }
 \usage{
-readingFrame(coordinates, riboDat, rC, lengths = 26:30)
+readingFrame(rC, lengths = 26:30)
 plotFS(fS, lengths, legend.text = c("Frame 0", "Frame 1", "Frame 2"), ...)
 }
 \arguments{
-  \item{coordinates}{
-    Coordinates of transcripts. Need not be given if a riboCoding object
-    is specified in `rC'.
-}
-  \item{riboDat}{
-    A \code{riboData} object containing the ribosome footprint
-    data. Need not be given if a riboCoding object is specified in `rC'.
-}
   \item{rC}{
-    A riboCoding object.
+    A riboCoding object, produced by the \code{\link{frameCounting}} function.
 }
   \item{lengths}{
     Lengths of reads to be analysed for frame-shift, or to be

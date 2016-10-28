@@ -1,5 +1,7 @@
 filterHits <-
-  function(fCs, lengths = 27, frames, hitMean = 10, unqhitMean = 1, ratioCheck = TRUE, fS) {
+    function(fCs, lengths = 27, frames, hitMean = 10, unqhitMean = 1, ratioCheck = TRUE, fS) {
+
+        if(is.list(fS)) fS <- Reduce("+", fS)
     if(missing(frames)) frames <- list(0:2)
     if(!is.list(frames)) frames <- list(frames)
     if(length(frames) == 1) frames <- rep(frames, length(lengths))

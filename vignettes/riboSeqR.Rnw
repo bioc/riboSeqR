@@ -24,7 +24,7 @@ Ribosome profiling extracts those parts of a coding sequence currently bound by 
 
 \section*{Getting Data}
 
-\verb'riboSeqR' currently reads alignment data from flat text files that contain (as a minimum), the sequence of the read, the name of the sequence to which the read aligns, the strand to which it aligns, and the starting position of alignment. A \software{Bowtie} alignment (note that \software{Bowtie}, rather than \software{Bowtie2}, is recommended for short reads, which ribosome footprints are) using the option ``--suppress 1,6,7,8'' will generate this minimal data. It is by default assumed that the data are generated in this way, and the default columns specification for the default \Rfunction{readRibodata} function (see below) reflects this.
+\verb'riboSeqR' currently reads alignment data from BAM files, or from flat text files, although BAM format is recommended.
 
 \section*{Workflow Example}
 
