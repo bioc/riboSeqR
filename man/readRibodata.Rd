@@ -10,7 +10,7 @@
 }
 \usage{
 readRibodata(riboFiles, rnaFiles, columns = c(strand = 1, seqname = 2,
-start = 3, sequence = 4), zeroIndexed = TRUE, header = FALSE, replicates, seqnames)
+start = 3, sequence = 4), zeroIndexed = FALSE, header = FALSE, replicates, seqnames)
 }
 \arguments{
   \item{riboFiles}{
@@ -25,10 +25,9 @@ start = 3, sequence = 4), zeroIndexed = TRUE, header = FALSE, replicates, seqnam
   }
   \item{zeroIndexed}{
     Are the alignments zero-indexed (i.e., the first base in a sequence
-    is 0). Defaults to TRUE, which will result in an adjustment to
-    1-indexed data.}
+    is 0). Defaults to FALSE.}
   \item{header}{
-    Does the alignment file have a header line? Defaults to FALSE.
+    Does the (non-bam) alignment file have a header line? Defaults to FALSE.
 }
   \item{replicates}{
     Replicate information for the files.

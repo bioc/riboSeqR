@@ -30,7 +30,7 @@
   }
 
 readRibodata <-
-function(riboFiles, rnaFiles, columns = c(strand = 1, seqname = 2, start = 3, sequence = 4), zeroIndexed = TRUE, header = FALSE, replicates, seqnames) {
+function(riboFiles, rnaFiles, columns = c(strand = 1, seqname = 2, start = 3, sequence = 4), zeroIndexed = FALSE, header = FALSE, replicates, seqnames) {
   riboDat <- new("riboData", replicates = as.factor(replicates))
   message("Reading ribosomal files...", appendLF = FALSE)
   riboDat@riboGR <- .readAlignments(riboFiles, columns = columns, header = header, seqnames, zeroIndexed = zeroIndexed)
