@@ -2,9 +2,17 @@ import("methods")
 import("GenomicRanges")
 import("abind")
 import("IRanges")
+importFrom("S4Vectors", "queryHits", "subjectHits")
+importFrom("grDevices", "dev.list", "rainbow", "rgb")
+importFrom("graphics", "axis", "barplot", "lines", "par", "rect",
+           "segments", "text")
+importFrom("stats", "chisq.test", "weighted.mean")
+importFrom("utils", "modifyList", "read.delim")
 importFrom("Rsamtools", "scanBam")
 importFrom("GenomeInfoDb", "seqlevels")
 importFrom("baySeq", "getLibsizes")
 importFrom("seqLogo", "makePWM", "seqLogo")
 exportMethods("dim", "[", "show")
-export("readRibodata", "findCDS", "frameCounting", "readingFrame", "filterHits", "plotCDS", "plotTranscript", "sliceCounts", "rnaCounts", "plotFS", "lengthDist", "libScales", "logoContext")
+export("readRibodata", "findCDS", "frameCounting", "readingFrame", 
+       "filterHits", "plotCDS", "plotTranscript", "sliceCounts", "rnaCounts", 
+       "plotFS", "lengthDist", "libScales", "logoContext")

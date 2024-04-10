@@ -14,7 +14,7 @@ Depends:
     methods,
     GenomicRanges,
     abind
-Imports: Rsamtools, IRanges, baySeq, GenomeInfoDb, seqLogo
+Imports: Rsamtools, IRanges, S4Vectors, baySeq, GenomeInfoDb, seqLogo
 Suggests:
     BiocStyle,
     RUnit,
