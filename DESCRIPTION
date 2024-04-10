@@ -5,8 +5,8 @@ Description: Plotting functions, frameshift detection and parsing of sequencing
     data from ribosome profiling experiments.
 Version: 1.37.1
 Date: 2014-08-14
-Author: Thomas J. Hardcastle
-Maintainer: Thomas J. Hardcastle <tjh48@cam.ac.uk>
+Authors@R: c(person("Thomas J.", "Hardcastle", role = "aut"),
+  person("Samuel", "Granjeaud", role = "cre", email = "samuel.granjeaud@inserm.fr", comment=c(ORCID="0000-0001-9245-1535")))
 License: GPL-3
 LazyLoad: yes
 Depends:
@@ -21,3 +21,5 @@ Suggests:
     BiocGenerics
 biocViews: Sequencing,Genetics,Visualization,RiboSeq
 PackageStatus: Deprecated
+URL: https://github.com/samgg/riboSeqR
+BugReports: https://github.com/samgg/riboSeqR/issues
