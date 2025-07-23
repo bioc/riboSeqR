@@ -9,7 +9,7 @@ importFrom("graphics", "axis", "barplot", "lines", "par", "rect",
 importFrom("stats", "chisq.test", "weighted.mean")
 importFrom("utils", "modifyList", "read.delim")
 importFrom("Rsamtools", "scanBam")
-importFrom("GenomeInfoDb", "seqlevels")
+importFrom("Seqinfo", "seqlevels")
 importFrom("baySeq", "getLibsizes")
 importFrom("seqLogo", "makePWM", "seqLogo")
 exportMethods("dim", "[", "show")

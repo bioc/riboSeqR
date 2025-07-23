@@ -3,8 +3,8 @@ Type: Package
 Title: Analysis of sequencing data from ribosome profiling experiments
 Description: Plotting functions, frameshift detection and parsing of sequencing
     data from ribosome profiling experiments.
-Version: 1.43.0
-Date: 2014-08-14
+Version: 1.43.1
+Date: 2025-07-23
 Authors@R: c(person("Thomas J.", "Hardcastle", role = "aut"),
   person("Samuel", "Granjeaud", role = "cre", email = "samuel.granjeaud@inserm.fr", comment=c(ORCID="0000-0001-9245-1535")))
 License: GPL-3
@@ -14,7 +14,7 @@ Depends:
     methods,
     GenomicRanges,
     abind
-Imports: Rsamtools, IRanges, S4Vectors, baySeq, GenomeInfoDb, seqLogo
+Imports: Rsamtools, IRanges, S4Vectors, baySeq, Seqinfo, seqLogo
 Suggests:
     BiocStyle,
     RUnit,
